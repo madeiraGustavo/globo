@@ -14,10 +14,11 @@ export function Globe3D() {
   const [hovered, setHovered] = useState<GlobeLocation | null>(null);
 
   return (
-    <div className="relative h-full min-h-[320px] w-full">
+    <div className="globe-stage relative h-full min-h-0 w-full min-w-0 overflow-hidden">
       <CanvasErrorBoundary>
         <Canvas
-          className="h-full w-full touch-none"
+          className="h-full w-full touch-pan-y"
+          style={{ width: "100%", height: "100%" }}
           dpr={[1, 1.5]}
           gl={{
             antialias: true,
@@ -28,6 +29,19 @@ export function Globe3D() {
           fallback={<GlobeFallback />}
           onCreated={({ gl }) => {
             gl.setClearColor(0x000000, 0);
+            const el = gl.domElement;
+            el.style.width = "100%";
+            el.style.height = "100%";
+            el.style.display = "block";
+            const syncSize = () => {
+              const parent = el.parentElement;
+              if (!parent || parent.clientWidth === 0 || parent.clientHeight === 0) {
+                return;
+              }
+              gl.setSize(parent.clientWidth, parent.clientHeight, false);
+            };
+            syncSize();
+            requestAnimationFrame(syncSize);
           }}
           frameloop={reduceMotion ? "demand" : "always"}
         >

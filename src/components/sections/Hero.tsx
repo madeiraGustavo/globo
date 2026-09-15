@@ -22,11 +22,11 @@ export function Hero() {
         <div className="grid-overlay absolute inset-0 opacity-50" />
         <div className="noise-overlay absolute inset-0 opacity-[0.07] mix-blend-overlay" />
       </div>
-      <Container className="relative grid items-center py-6 lg:grid-cols-12 lg:gap-6 lg:py-8">
-        <div className="lg:col-span-5">
+      <Container className="relative grid min-w-0 items-center py-6 lg:grid-cols-12 lg:gap-6 lg:py-8">
+        <div className="min-w-0 lg:col-span-5">
           <HeroContent />
         </div>
-        <div className="relative h-[42vh] min-h-[280px] lg:col-span-7 lg:h-[min(56vh,560px)]">
+        <div className="relative mt-4 h-[min(38vh,280px)] min-h-[200px] w-full min-w-0 overflow-hidden lg:col-span-7 lg:mt-0 lg:h-[min(56vh,560px)] lg:min-h-[280px]">
           <Globe3D />
         </div>
       </Container>

@@ -5,7 +5,7 @@ import { Logo } from "@/components/layout/Logo";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line-subtle bg-bg-secondary">
+    <footer className="border-t border-line-subtle bg-bg-secondary pb-[env(safe-area-inset-bottom,0px)]">
       <Container className="py-12 md:py-16">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">

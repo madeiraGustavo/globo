@@ -4,6 +4,7 @@
   --background: #050505;
   --foreground: #ffffff;
   --header-height: 80px;
+  --header-offset: calc(var(--header-height) + env(safe-area-inset-top, 0px));
 }
 
 @theme {
@@ -38,11 +39,15 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-height);
+  scroll-padding-top: var(--header-offset);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
+  overflow-x: clip;
   background: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
@@ -59,7 +64,7 @@ body {
 }
 
 @utility text-display {
-  font-size: clamp(2.625rem, 6vw, 5.75rem);
+  font-size: clamp(2.125rem, 9.2vw, 5.75rem);
   line-height: 0.96;
   letter-spacing: -0.045em;
   font-weight: 500;
@@ -73,8 +78,8 @@ body {
 }
 
 @utility text-h2 {
-  font-size: clamp(2rem, 3.6vw, 3.75rem);
-  line-height: 1.05;
+  font-size: clamp(1.625rem, 6.4vw, 3.75rem);
+  line-height: 1.08;
   letter-spacing: -0.035em;
   font-weight: 500;
 }
@@ -105,19 +110,24 @@ body {
 @utility container-page {
   margin-inline: auto;
   width: 100%;
+  min-width: 0;
   max-width: var(--max-width-container);
-  padding-inline: 1.25rem;
+  overflow-wrap: break-word;
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px))
+    max(1.25rem, env(safe-area-inset-right, 0px));
 }
 
 @media (min-width: 768px) {
   .container-page {
-    padding-inline: 2rem;
+    padding-inline: max(2rem, env(safe-area-inset-left, 0px))
+      max(2rem, env(safe-area-inset-right, 0px));
   }
 }
 
 @media (min-width: 1024px) {
   .container-page {
-    padding-inline: 3rem;
+    padding-inline: max(3rem, env(safe-area-inset-left, 0px))
+      max(3rem, env(safe-area-inset-right, 0px));
   }
 }
 
@@ -212,6 +222,22 @@ body {
   animation: marquee 42s linear infinite;
 }
 
+.globe-stage,
+.globe-stage > div {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.globe-stage canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  touch-action: pan-y;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -219,11 +245,17 @@ body {
 
   .animate-marquee {
     animation: none;
-    width: max-content;
+    width: 100%;
+    max-width: 100%;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 100%;
-    row-gap: 1rem;
+    column-gap: 2rem;
+    row-gap: 0.75rem;
+    padding-right: 0;
+  }
+
+  .marquee-duplicate {
+    display: none;
   }
 
   .reveal {

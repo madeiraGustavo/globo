@@ -17,16 +17,18 @@ export function FinalCTA() {
         aria-hidden="true"
       />
       <Reveal>
-        <div className="relative overflow-hidden rounded-xl border border-line bg-surface px-6 py-10 text-center md:px-12 md:py-14">
+        <div className="relative overflow-hidden rounded-xl border border-line bg-surface px-5 py-8 text-center sm:px-6 md:px-12 md:py-14">
           <p className="text-small mb-3 uppercase text-accent">{finalCtaCopy.eyebrow}</p>
-          <h2 id="contato-titulo" className="text-h2 mx-auto max-w-3xl text-fg">
+          <h2 id="contato-titulo" className="text-h2 mx-auto max-w-3xl text-balance text-fg">
             {finalCtaCopy.title}
           </h2>
           <p className="text-body-lg mx-auto mt-4 max-w-xl text-fg-secondary">
             {finalCtaCopy.description}
           </p>
           <div className="mt-7 flex justify-center">
-            <Button href={`mailto:${site.email}`}>{site.cta.primary.label}</Button>
+            <Button href={`mailto:${site.email}`} className="w-full sm:w-auto">
+              {site.cta.primary.label}
+            </Button>
           </div>
           <p className="text-small mt-6 text-fg-muted">{site.email}</p>
         </div>

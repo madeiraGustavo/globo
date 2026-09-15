@@ -11,7 +11,7 @@ export function Metrics() {
         {metricsCopy.title}
       </h2>
       <Reveal>
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
           {metrics.map((item) => (
             <Metric
               key={item.id}

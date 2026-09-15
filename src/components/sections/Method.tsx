@@ -15,10 +15,10 @@ export function Method() {
           description={methodCopy.description}
         />
       </Reveal>
-      <ol className="mt-8 grid gap-4 lg:grid-cols-5">
+      <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {methodSteps.map((step) => (
           <li key={step.id} id={`metodo-${step.id}`}>
-            <article className="h-full w-full rounded-lg border border-line-subtle bg-transparent p-6 text-left transition-[border-color,background-color] duration-200 ease-premium hover:border-accent hover:bg-surface">
+            <article className="h-full w-full min-w-0 rounded-lg border border-line-subtle bg-transparent p-5 text-left transition-[border-color,background-color] duration-200 ease-premium hover:border-accent hover:bg-surface sm:p-6">
               <p className="text-small text-accent">{step.number}</p>
               <h3 className="text-h3 mt-3 text-fg">{step.title}</h3>
               <p className="text-body mt-3 text-fg-secondary">

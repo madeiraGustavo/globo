@@ -24,13 +24,13 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 h-20 transition-[background-color,border-color,backdrop-filter] duration-300 ease-premium",
+        "sticky top-0 z-50 h-[var(--header-offset)] pt-[env(safe-area-inset-top,0px)] transition-[background-color,border-color,backdrop-filter] duration-300 ease-premium",
         scrolled || open
           ? "border-b border-line-subtle bg-bg/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="container-page flex h-full items-center justify-between gap-6">
+      <div className="container-page flex h-full min-w-0 items-center justify-between gap-3 sm:gap-6">
         <Logo />
         <Navbar />
         <div className="hidden lg:block">
@@ -40,7 +40,7 @@ export function Header() {
         </div>
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-md text-fg lg:hidden"
+          className="relative z-10 inline-flex size-11 shrink-0 items-center justify-center rounded-md text-fg lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-navigation"
           aria-label={open ? "Fechar menu" : "Abrir menu"}

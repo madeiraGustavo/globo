@@ -9,7 +9,7 @@ type MetricProps = {
 
 export function Metric({ value, suffix = "", label, className }: MetricProps) {
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
+    <div className={cn("flex min-w-0 flex-col gap-2", className)}>
       <span
         className="text-h2 tabular-nums text-fg"
         aria-label={`${value}${suffix} ${label}`}

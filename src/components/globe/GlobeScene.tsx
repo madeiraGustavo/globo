@@ -67,23 +67,25 @@ export function GlobeScene({ reducedMotion, onHover }: GlobeSceneProps) {
         <GlobeArcs reducedMotion={reducedMotion} />
       </group>
       {!reducedMotion ? <OrbitParticles count={particleCount} /> : null}
-      <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        rotateSpeed={0.42}
-        autoRotate={false}
-        onStart={() => {
-          if (resumeTimer.current) {
-            window.clearTimeout(resumeTimer.current);
-          }
-          setDragging(true);
-        }}
-        onEnd={() => {
-          resumeTimer.current = window.setTimeout(() => {
-            setDragging(false);
-          }, 1600);
-        }}
-      />
+      {!isMobile ? (
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          rotateSpeed={0.42}
+          autoRotate={false}
+          onStart={() => {
+            if (resumeTimer.current) {
+              window.clearTimeout(resumeTimer.current);
+            }
+            setDragging(true);
+          }}
+          onEnd={() => {
+            resumeTimer.current = window.setTimeout(() => {
+              setDragging(false);
+            }, 1600);
+          }}
+        />
+      ) : null}
     </>
   );
 }

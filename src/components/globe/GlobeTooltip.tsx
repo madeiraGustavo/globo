@@ -11,7 +11,7 @@ export function GlobeTooltip({ location }: GlobeTooltipProps) {
 
   return (
     <div
-      className="pointer-events-none absolute bottom-6 left-6 z-10 max-w-xs rounded-md border border-line bg-surface-elevated/90 px-4 py-3 backdrop-blur-md"
+      className="pointer-events-none absolute bottom-4 left-4 z-10 max-w-[min(100%-2rem,20rem)] rounded-md border border-line bg-surface-elevated/90 px-4 py-3 backdrop-blur-md"
       role="status"
     >
       <p className="text-sm font-medium text-fg">{location.city}</p>

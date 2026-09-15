@@ -31,11 +31,13 @@ export function SectionHeader({
           {eyebrow}
         </p>
       ) : null}
-      <h2 id={titleId} className="text-h2 text-fg">
+      <h2 id={titleId} className="text-h2 text-balance text-fg">
         {title}
       </h2>
       {description ? (
-        <p className="text-body-lg mt-3 text-fg-secondary">{description}</p>
+        <p className="text-body-lg mt-3 text-pretty text-fg-secondary">
+          {description}
+        </p>
       ) : null}
     </header>
   );

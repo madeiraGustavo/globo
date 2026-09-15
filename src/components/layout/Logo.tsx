@@ -10,7 +10,7 @@ export function Logo({ className }: LogoProps) {
     <a
       href="#topo"
       className={cn(
-        "inline-flex min-h-11 items-center gap-2 text-sm font-medium tracking-[0.18em] uppercase text-fg",
+        "inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-medium tracking-[0.18em] uppercase text-fg",
         className,
       )}
       aria-label={`${site.name}, ir para o início`}

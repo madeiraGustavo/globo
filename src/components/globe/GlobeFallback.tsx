@@ -1,7 +1,7 @@
 export function GlobeFallback() {
   return (
     <div
-      className="relative h-full min-h-[280px] w-full overflow-hidden"
+      className="relative h-full min-h-0 w-full overflow-hidden"
       aria-hidden="true"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgb(183_255_60_/_0.12),transparent_58%)]" />

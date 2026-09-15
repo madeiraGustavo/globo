@@ -51,12 +51,12 @@ export function Testimonials() {
       </div>
       <div
         ref={scroller}
-        className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-6 flex min-w-0 snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {testimonials.map((item) => (
           <div
             key={item.id}
-            className="min-w-[min(100%,360px)] snap-start md:min-w-[420px]"
+            className="w-[min(100%,360px)] shrink-0 snap-start md:w-[420px]"
           >
             <TestimonialCard item={item} />
           </div>

@@ -11,7 +11,7 @@ export function CaseCard({ item, reversed = false }: CaseCardProps) {
   return (
     <article
       className={cn(
-        "grid items-center gap-6 lg:grid-cols-12 lg:gap-10",
+        "grid min-w-0 items-center gap-6 lg:grid-cols-12 lg:gap-10",
       )}
     >
       <div
@@ -22,7 +22,7 @@ export function CaseCard({ item, reversed = false }: CaseCardProps) {
       >
         <CaseVisual accent={item.accent} title={item.client} />
       </div>
-      <div className={cn("lg:col-span-5", reversed && "lg:order-1")}>
+      <div className={cn("min-w-0 lg:col-span-5", reversed && "lg:order-1")}>
         <p className="text-small mb-3 uppercase text-accent">{item.category}</p>
         <p className="text-body text-fg-muted">{item.client}</p>
         <h3 className="text-h3 mt-3 text-fg">{item.title}</h3>
@@ -58,7 +58,7 @@ function CaseVisual({ accent, title }: { accent: CaseAccent; title: string }) {
           background: `radial-gradient(circle at 30% 20%, ${accent}33, transparent 42%), radial-gradient(circle at 80% 80%, ${accent}22, transparent 40%), #090909`,
         }}
       />
-      <div className="absolute inset-8 rounded-lg border border-line bg-surface-elevated/80 p-5 backdrop-blur-sm">
+      <div className="absolute inset-4 overflow-hidden rounded-lg border border-line bg-surface-elevated/80 p-4 backdrop-blur-sm sm:inset-8 sm:p-5">
         <div className="mb-5 flex gap-1.5">
           <span className="size-2.5 rounded-full bg-line" />
           <span className="size-2.5 rounded-full bg-line" />
@@ -66,12 +66,12 @@ function CaseVisual({ accent, title }: { accent: CaseAccent; title: string }) {
         </div>
         <div className="grid gap-3">
           <div className="h-3 w-1/3 rounded-pill bg-fg/15" />
-          <div className="h-24 rounded-md border border-line-subtle bg-bg/60" />
-          <div className="grid grid-cols-3 gap-3">
-            <div className="h-16 rounded-md bg-fg/8" />
-            <div className="h-16 rounded-md bg-fg/8" />
+          <div className="h-16 rounded-md border border-line-subtle bg-bg/60 sm:h-24" />
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <div className="h-12 rounded-md bg-fg/8 sm:h-16" />
+            <div className="h-12 rounded-md bg-fg/8 sm:h-16" />
             <div
-              className="h-16 rounded-md"
+              className="h-12 rounded-md sm:h-16"
               style={{ background: `${accent}33` }}
             />
           </div>

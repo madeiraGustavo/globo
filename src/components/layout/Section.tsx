@@ -24,7 +24,7 @@ export function Section({
   ...props
 }: SectionProps) {
   return (
-    <section className={cn(densityClass[density], className)} {...props}>
+    <section className={cn("min-w-0", densityClass[density], className)} {...props}>
       {contained ? <Container>{children}</Container> : children}
     </section>
   );
