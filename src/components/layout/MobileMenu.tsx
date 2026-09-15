@@ -18,7 +18,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
     <AnimatePresence>
       {open ? (
         <motion.div
-          className="fixed inset-0 z-40 flex flex-col bg-bg px-5 pt-[calc(var(--header-offset)+1.5rem)] pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] lg:hidden"
+          className="fixed inset-0 z-40 flex flex-col bg-bg px-5 pt-[calc(var(--header-offset)+1.5rem)] pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] xl:hidden"
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={reduceMotion ? undefined : { opacity: 0 }}

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 
 export function HeroContent() {
   return (
-    <div className="relative z-10 flex w-full min-w-0 max-w-xl flex-col justify-center py-2 lg:py-4">
+    <div className="relative z-10 flex w-full min-w-0 max-w-xl flex-col justify-center py-2 xl:py-4">
       <p className="text-small mb-3 uppercase text-accent">
         {heroCopy.eyebrow}
       </p>

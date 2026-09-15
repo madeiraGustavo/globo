@@ -11,10 +11,15 @@ const POINT_RADIUS = GLOBE_RADIUS + 0.02;
 
 type GlobePointProps = {
   location: GlobeLocation;
+  interactive?: boolean;
   onHover: (location: GlobeLocation | null) => void;
 };
 
-export function GlobePoint({ location, onHover }: GlobePointProps) {
+export function GlobePoint({
+  location,
+  interactive = true,
+  onHover,
+}: GlobePointProps) {
   const ring = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
   const position = useMemo(
@@ -35,16 +40,24 @@ export function GlobePoint({ location, onHover }: GlobePointProps) {
   return (
     <group position={position}>
       <mesh
-        onPointerOver={(event) => {
-          event.stopPropagation();
-          setHovered(true);
-          onHover(location);
-        }}
-        onPointerOut={(event) => {
-          event.stopPropagation();
-          setHovered(false);
-          onHover(null);
-        }}
+        onPointerOver={
+          interactive
+            ? (event) => {
+                event.stopPropagation();
+                setHovered(true);
+                onHover(location);
+              }
+            : undefined
+        }
+        onPointerOut={
+          interactive
+            ? (event) => {
+                event.stopPropagation();
+                setHovered(false);
+                onHover(null);
+              }
+            : undefined
+        }
       >
         <sphereGeometry args={[0.028 * scale, 16, 16]} />
         <meshBasicMaterial color={hovered ? "#ffffff" : GLOBE_ACCENT} />

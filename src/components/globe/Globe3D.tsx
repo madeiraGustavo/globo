@@ -1,24 +1,47 @@
 "use client";
 
-import { Component, type ErrorInfo, type ReactNode } from "react";
+import { Component, type ErrorInfo, type ReactNode, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
-import { useState } from "react";
 import { GlobeFallback } from "@/components/globe/GlobeFallback";
 import { GlobeScene } from "@/components/globe/GlobeScene";
 import { GlobeTooltip } from "@/components/globe/GlobeTooltip";
 import type { GlobeLocation } from "@/types/globe";
 
+const DESKTOP_GLOBE_QUERY = "(min-width: 1280px)";
+
+function useDesktopGlobe() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(DESKTOP_GLOBE_QUERY);
+    const sync = () => setIsDesktop(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  return isDesktop;
+}
+
 export function Globe3D() {
   const reduceMotion = useReducedMotion();
+  const interactive = useDesktopGlobe();
   const [hovered, setHovered] = useState<GlobeLocation | null>(null);
 
   return (
-    <div className="globe-stage relative h-full min-h-0 w-full min-w-0 overflow-hidden">
+    <div className="globe-stage absolute inset-0 min-h-0 min-w-0 overflow-hidden">
       <CanvasErrorBoundary>
         <Canvas
-          className="h-full w-full touch-pan-y"
-          style={{ width: "100%", height: "100%" }}
+          className="absolute inset-0 h-full w-full touch-pan-y"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            display: "block",
+            pointerEvents: interactive ? "auto" : "none",
+          }}
           dpr={[1, 1.5]}
           gl={{
             antialias: true,
@@ -46,6 +69,7 @@ export function Globe3D() {
           frameloop={reduceMotion ? "demand" : "always"}
         >
           <GlobeScene
+            interactive={interactive}
             reducedMotion={Boolean(reduceMotion)}
             onHover={setHovered}
           />

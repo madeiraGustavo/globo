@@ -33,14 +33,14 @@ export function Header() {
       <div className="container-page flex h-full min-w-0 items-center justify-between gap-3 sm:gap-6">
         <Logo />
         <Navbar />
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <Button href={site.cta.primary.href} variant="primary">
             {site.cta.primary.label}
           </Button>
         </div>
         <button
           type="button"
-          className="relative z-10 inline-flex size-11 shrink-0 items-center justify-center rounded-md text-fg lg:hidden"
+          className="relative z-10 inline-flex size-11 shrink-0 items-center justify-center rounded-md text-fg xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-navigation"
           aria-label={open ? "Fechar menu" : "Abrir menu"}

@@ -1,7 +1,7 @@
 "use client";
 
 import { OrbitControls } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { GlobeArcs } from "@/components/globe/GlobeArcs";
@@ -13,23 +13,32 @@ import { GLOBE_ACCENT } from "@/lib/globe-theme";
 import type { GlobeLocation } from "@/types/globe";
 
 type GlobeSceneProps = {
+  interactive: boolean;
   reducedMotion: boolean;
   onHover: (location: GlobeLocation | null) => void;
 };
 
-export function GlobeScene({ reducedMotion, onHover }: GlobeSceneProps) {
+const SPIN_RADIANS_PER_SECOND = 0.12;
+
+export function GlobeScene({
+  interactive,
+  reducedMotion,
+  onHover,
+}: GlobeSceneProps) {
   const group = useRef<THREE.Group>(null);
   const [dragging, setDragging] = useState(false);
   const resumeTimer = useRef<number | null>(null);
-  const { size } = useThree();
-  const isMobile = size.width < 768;
-  const particleCount = isMobile ? 16 : 42;
+  const compact = !interactive;
+  const particleCount = compact ? 16 : 42;
 
   useFrame((_, delta) => {
-    if (!group.current || reducedMotion || dragging) {
+    if (!group.current || reducedMotion) {
       return;
     }
-    group.current.rotation.y += delta * 0.07;
+    if (interactive && dragging) {
+      return;
+    }
+    group.current.rotation.y += delta * SPIN_RADIANS_PER_SECOND;
   });
 
   return (
@@ -38,7 +47,7 @@ export function GlobeScene({ reducedMotion, onHover }: GlobeSceneProps) {
       <directionalLight position={[4, 2, 6]} intensity={1.15} color="#f2ffe0" />
       <pointLight position={[-3, -2, -4]} intensity={0.45} color={GLOBE_ACCENT} />
       <group ref={group}>
-        <GlobeContinents compact={isMobile} />
+        <GlobeContinents compact={compact} />
         <mesh>
           <sphereGeometry args={[GLOBE_RADIUS + 0.01, 48, 48]} />
           <meshBasicMaterial
@@ -61,13 +70,14 @@ export function GlobeScene({ reducedMotion, onHover }: GlobeSceneProps) {
           <GlobePoint
             key={location.id}
             location={location}
+            interactive={interactive}
             onHover={onHover}
           />
         ))}
         <GlobeArcs reducedMotion={reducedMotion} />
       </group>
       {!reducedMotion ? <OrbitParticles count={particleCount} /> : null}
-      {!isMobile ? (
+      {interactive ? (
         <OrbitControls
           enablePan={false}
           enableZoom={false}
