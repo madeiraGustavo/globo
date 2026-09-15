@@ -6,8 +6,11 @@ import * as THREE from "three";
 import { GLOBE_RADIUS } from "@/lib/geo";
 import { GLOBE_ACCENT } from "@/lib/globe-theme";
 
-const LAND_TEXTURE_DESKTOP = "/globe/land-2048x1024.png";
-const LAND_TEXTURE_COMPACT = "/globe/land-1024x512.png";
+const assetPath = (path: string) =>
+  `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+
+const LAND_TEXTURE_DESKTOP = assetPath("/globe/land-2048x1024.png");
+const LAND_TEXTURE_COMPACT = assetPath("/globe/land-1024x512.png");
 
 type GlobeContinentsProps = {
   compact: boolean;
